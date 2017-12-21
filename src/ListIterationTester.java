@@ -11,12 +11,12 @@ import java.util.*;
  */
 public class ListIterationTester 
 {
-	private static Scanner sc = new Scanner(System.in); 
 	public static void main(String[] args)
 	{
 		System.out.println("1. Create List of Student IDs from input text file.");
 		System.out.println("2. Create List of Student IDs by adding manually.");
 		System.out.print("Choose option: ");
+		Scanner sc = new Scanner(System.in);
 		String option = sc.nextLine();
 		List<String> studentList = new ArrayList<String>();
 		if(option.equals("1")) //Create List of Student IDs from input text file
@@ -25,11 +25,13 @@ public class ListIterationTester
 			studentList = createListByAdding();
 		else
 		{
+			//If users choose invalid option. The program will terminanate
 			System.out.println("Invalid option. Program is terminated.");
 			System.exit(0);
 		}
+		sc.close();
 		ListIteration li = new ListIteration();
-		Map<String, Integer> hm = li.frequencyCount(null);
+		Map<String, Integer> hm = li.frequencyCount(studentList);
 		printHashMap(hm);
 		sc.close();
 	}
@@ -55,18 +57,17 @@ public class ListIterationTester
 	private static List<String> createListFromFile()
 	{
 		System.out.print("Enter input file name: ");
+		Scanner sc = new Scanner(System.in);
 		String fileName = sc.nextLine();
-		
 		List<String> studentList = new ArrayList<String>();
 		try
 		{
-			Scanner sc = new Scanner(new File(fileName));
+			sc = new Scanner(new File(fileName));
 			while(sc.hasNext())
 			{
 				String s = sc.nextLine();
 				studentList.add(s);
 			}
-			sc.close();
 		}
 		catch(FileNotFoundException e) 
 		{
@@ -82,6 +83,7 @@ public class ListIterationTester
 	private static List<String> createListByAdding()
 	{
 		System.out.println("Enter Student IDs seperated by comma: ");
+		Scanner sc = new Scanner(System.in);
 		String studentIDString = sc.nextLine();	
 		List<String> studentList = new ArrayList<String>();
 		if(studentIDString.length() > 0)
