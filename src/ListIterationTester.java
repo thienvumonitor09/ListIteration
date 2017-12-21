@@ -19,7 +19,6 @@ public class ListIterationTester
 		System.out.print("Choose option: ");
 		String option = sc.nextLine();
 		List<String> studentList = new ArrayList<String>();
-		
 		if(option.equals("1")) //Create List of Student IDs from input text file
 			studentList = createListFromFile();
 		else if(option.equals("2")) //Create List of Student IDs by adding manual
@@ -29,13 +28,9 @@ public class ListIterationTester
 			System.out.println("Invalid option. Program is terminated.");
 			System.exit(0);
 		}
-		
-		
 		ListIteration li = new ListIteration();
 		Map<String, Integer> hm = li.frequencyCount(null);
-		printHashMap(hm);	
-		
-		
+		printHashMap(hm);
 		sc.close();
 	}
 	
@@ -81,7 +76,8 @@ public class ListIterationTester
 	}
 	
 	/*
-	 * This method is used to create List of String student ids by adding from command separated by comma
+	 * This method is used to create List of String student ids by adding from command separated by comma.
+	 * The method will eliminate leading and trailing spaces between commas
 	 */
 	private static List<String> createListByAdding()
 	{
