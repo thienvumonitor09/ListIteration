@@ -1,6 +1,14 @@
 import java.io.*;
 import java.util.*;
-
+/**
+ * The program takes input of List of String student ids 
+ * and generate output of Map of String to Integer
+ * where the String is the student id and the Integer is the number of times the student id showed up in the input List. 
+ * The program allows user to create student list from input file or read from stdin
+ * @author Vu Nguyen
+ * @version 1.0
+ *
+ */
 public class ListIterationTester 
 {
 	private static Scanner sc = new Scanner(System.in); 
@@ -13,7 +21,7 @@ public class ListIterationTester
 		List<String> studentList = new ArrayList<String>();
 		
 		if(option.equals("1")) //Create List of Student IDs from input text file
-			studentList = createListFromFile("input.txt");
+			studentList = createListFromFile();
 		else if(option.equals("2")) //Create List of Student IDs by adding manual
 			studentList = createListByAdding();
 		else
@@ -21,17 +29,23 @@ public class ListIterationTester
 			System.out.println("Invalid option. Program is terminated.");
 			System.exit(0);
 		}
-			
+		
+		
 		ListIteration li = new ListIteration();
-		Map<String, Integer> hm = li.frequencyCount(studentList);
+		Map<String, Integer> hm = li.frequencyCount(null);
 		printHashMap(hm);	
+		
+		
 		sc.close();
 	}
 	
+	/*
+	 * This method is used to print and format HashMap
+	 */
 	private static void printHashMap(Map<String, Integer> hm)
 	{
 		if(hm.isEmpty())
-			System.out.println("Map is empty");
+			System.out.println("Map is empty.");
 		else
 		{
 			System.out.printf("%-20s %s%n","Student ID", "Frequency");
@@ -40,8 +54,14 @@ public class ListIterationTester
 		}
 	}
 	
-	private static List<String> createListFromFile(String fileName)
+	/*
+	 * This method is used to create List of String student ids from input text file
+	 */
+	private static List<String> createListFromFile()
 	{
+		System.out.print("Enter input file name: ");
+		String fileName = sc.nextLine();
+		
 		List<String> studentList = new ArrayList<String>();
 		try
 		{
@@ -60,11 +80,16 @@ public class ListIterationTester
 		return studentList;
 	}
 	
+	/*
+	 * This method is used to create List of String student ids by adding from command separated by comma
+	 */
 	private static List<String> createListByAdding()
 	{
 		System.out.println("Enter Student IDs seperated by comma: ");
 		String studentIDString = sc.nextLine();	
-		List<String> studentList = Arrays.asList(studentIDString.split("\\s*,\\s*"));
+		List<String> studentList = new ArrayList<String>();
+		if(studentIDString.length() > 0)
+			studentList = Arrays.asList(studentIDString.split("\\s*,\\s*"));
 		return studentList;
 	}
 }
